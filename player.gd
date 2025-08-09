@@ -15,6 +15,12 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node) -> void:
 	var groups = body.get_groups()
 	if "Goal" in groups:
-		print("You win")
+		complete_level(body.file_path)
 	if "Hazard" in groups:
-		print("You crashed!")
+		crash_sequence()
+
+func crash_sequence() -> void:
+	get_tree().reload_current_scene()
+
+func complete_level(next_level_file: String) -> void:
+	get_tree().change_scene_to_file(next_level_file)
