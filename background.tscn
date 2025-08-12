@@ -1,7 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://bceexty4cx6nc"]
+[gd_scene load_steps=5 format=3 uid="uid://bceexty4cx6nc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5xgho"]
 albedo_color = Color(0.25, 0.183333, 0, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_po0nb"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_u52ul"]
+sky_material = SubResource("ProceduralSkyMaterial_po0nb")
+
+[sub_resource type="Environment" id="Environment_oabld"]
+background_mode = 1
+background_color = Color(0.07, 0.05845, 0.0385, 1)
+sky = SubResource("Sky_u52ul")
+ambient_light_source = 3
+tonemap_mode = 2
+glow_enabled = true
 
 [node name="Floor" type="CSGBox3D" groups=["Hazard"]]
 use_collision = true
@@ -87,3 +102,16 @@ material = SubResource("StandardMaterial3D_5xgho")
 transform = Transform3D(0.869812, -0.442642, -0.21793, 0.491891, 0.812316, 0.313347, 0.0383275, -0.379751, 0.924294, -10.3411, 14.9456, -5.7453)
 size = Vector3(3, 10, 3)
 material = SubResource("StandardMaterial3D_5xgho")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.984808, -0.111619, 0.133022, 0, 0.766044, 0.642788, -0.173648, -0.633022, 0.754407, 0.220524, 5.48483, 9.39936)
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_oabld")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.3817, 0)
+omni_range = 12.0
+omni_attenuation = -0.03
